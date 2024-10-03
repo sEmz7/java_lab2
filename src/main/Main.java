@@ -2,17 +2,19 @@ package main;
 
 public class Main {
     public static void main(String[] args) {
-        WashingMachine wm1 = new WashingMachine(60, 50);
-        WashingMachine wm2 = new WashingMachine(60, 20);
-        WashingMachine wm3 = new WashingMachine(60, 33);
-        WashingMachine wm4 = new WashingMachine(633, 333);
-
-        System.out.println(wm3.Load("светлое", 20));
-        System.out.println(wm3.Load("светлое", 14));
+        Linen linen1 = new Linen("светлое", 30, 20);
+        Linen linen2 = new Linen("светлое", 45, 20);
 
 
-        System.out.println(wm3);
+//        AutomaticMachine am1 = new AutomaticMachine(50);
+//        System.out.println(am1.load(linen1));
+//        System.out.println(am1.load(linen2));
+//        System.out.println(am1);
 
+        ManualMachine mm1 = new ManualMachine(50);
+        Linen linen3 = new Linen("темное", 60, 15);
+        System.out.println(mm1.load(linen3));
+        System.out.println(mm1);
 
     }
 }

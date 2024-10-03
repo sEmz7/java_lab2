@@ -1,41 +1,34 @@
 package main;
 
-import java.util.Objects;
+public abstract class WashingMachine {
+    protected int loadedWeight = 0;
+    protected int max_linenWeight;
+    protected Linen linen = new Linen();
 
-public class WashingMachine {
-    private String linentype = "неопределен";
-    private int temperature;
-    private int max_linenWeight;
-    private int loadedWeight = 0;
+    public void setLinen(Linen linen) {
+        this.linen = linen;
+    }
 
+    public Linen getLinen() {
+        return linen;
+    }
 
-    public WashingMachine(int temperature, int weight) {
-        this.temperature = temperature;
+    public WashingMachine(int weight) {
         this.max_linenWeight = weight;
     }
 
 
-    public String Load(String linentype, int linenWeight) {
-        if (loadedWeight + linenWeight > max_linenWeight) {
+    public String load(Linen linen) {
+        if (linen.getLinenWeight() + loadedWeight > max_linenWeight) {
             return "Превышена максимальная вместимость стиралки";
         }
-        else if (Objects.equals(this.linentype, "неопределен")) {
-            this.linentype = linentype;
-            this.loadedWeight = linenWeight;
-            return "Загружено белье типа " + linentype + " массой " + linenWeight + "кг. Текущая масса " + loadedWeight + "кг";
-        }
-        else if (Objects.equals(linentype, this.linentype)) {
-            this.loadedWeight += linenWeight;
-            return "Добавлено белье типа " + linentype + " массой " + linenWeight + "кг. Текущая масса " + loadedWeight + "кг";
-        }
-        else {
-            return "В стиралке уже загружено белье другого типа";
-        }
+        this.loadedWeight += linen.getLinenWeight();
+        setLinen(linen);
+        return "Добавлено белье массой  "+ linen.getLinenWeight() + "кг. Текущая масса " + loadedWeight + "кг";
     }
-
 
     @Override
     public String toString() {
-        return "Стиральная машина загружена на " + loadedWeight + "кг. Тип белья " + linentype;
+        return "Стиральная машина загружена на " + loadedWeight + "кг. Тип белья " + linen.getLinentype() + ". Температура стирки " + linen.getTemperature() + " градусов";
     }
 }
